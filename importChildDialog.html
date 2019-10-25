@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <form class="form-horizontal">
+<fieldset>
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Select Child</label>
+  <div class="col-md-4">
+    <select id="selectChild" name="selectbasic" class="form-control">
+    <option value="select" selected>--- Select Child ---</option>
+    <optgroup label="Full Time">
+      <? for (var i = 0; i < fullTimeChildren.length; i++) { ?>
+       <? if (fullTimeChildren[i][0]) { ?>
+          <option value="<?= fullTimeChildren[i][0] ?>"><?= fullTimeChildren[i][0] ?></option>
+        <? } ?>
+    <? } ?>
+    </optgroup>
+    <optgroup label="Part Time">
+      <? for (var i = 0; i < partTimeChildren.length; i++) { ?>
+       <? if (partTimeChildren[i][0]) { ?>
+          <option value="<?= partTimeChildren[i][0] ?>"><?= partTimeChildren[i][0] ?></option>
+        <? } ?>
+    <? } ?>
+    </optgroup>
+    </select>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Select Invoice Month</label>
+  <div class="col-md-4">
+    <select id="selectMonth" name="selectbasic" class="form-control">
+       <? for (var i = 0; i < months.length; i++) { ?>
+       <? if (i == new Date().getMonth()) { ?>
+          <option value="<?= months[i] ?>" selected><?= months[i] ?></option>
+        <? } else { ?>
+          <option value="<?= months[i] ?>"><?= months[i] ?></option>
+        <? } ?>
+    <? } ?>
+    </select>
+  </div>
+</div>
+</fieldset>
+ <div class="col-md-8 text-right">
+    <button id="cancel" type='button'class="btn btn-danger" onclick="google.script.host.close()">Cancel</button>
+    <script type="text/javascript">
+    function startImport() {
+         var ddlNameElement = document.getElementById("selectChild")
+         var childName = ddlNameElement.options[ddlNameElement.selectedIndex].value;
+         var ddlMonthElement = document.getElementById("selectMonth");
+         var monthName = ddlMonthElement.options[ddlMonthElement.selectedIndex].value;
+
+         google.script.run.instigateImport(childName, monthName);
+         google.script.host.close();
+    }
+    </script>
+    <button id="import" type='button' class="btn btn-success" onclick="startImport()">Import</button>
+  </div>
+</form>
+
+  </body>
+</html>
