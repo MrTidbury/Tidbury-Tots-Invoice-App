@@ -1,2 +1,2 @@
 # Tidbury Tots Invoice App
- Appscript application for creation and sending of invoices
+Google Appscript Application for the creation, storing and sending of PDF invoices.
